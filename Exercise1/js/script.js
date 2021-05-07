@@ -16,13 +16,46 @@ testWebP(function (support) {
   }
 });
 
-//Burger
-$(document).ready(function () {
-  $('.icon-menu').click(function (event) {
-    $('.icon-menu, .menu__list').toggleClass('_active');
-    $('header').toggleClass('_lock');
+
+const iconMenu = document.querySelector('.icon-menu');
+const menuBody = document.querySelector('.menu__list');
+if (iconMenu) {
+  iconMenu.addEventListener('click', e => {
+    document.body.classList.toggle('_lock');
+    iconMenu.classList.toggle('_active');
+    menuBody.classList.toggle('_active');
+  })
+};
+
+let arrow = document.querySelectorAll('.arrow');
+
+for (i = 0; i < arrow.length; i++) {
+  let thisLink = arrow[i].previousElementSibling;
+  let subMenu = arrow[i].nextElementSibling;
+  let thisArrow = arrow[i];
+
+  thisArrow.onmousedown = function (event) {
+    event.preventDefault();
+  }
+  thisLink.classList.add('parent');
+  arrow[i].addEventListener('click', function () {
+    subMenu.classList.toggle('open');
+    thisArrow.classList.toggle('active');
   });
-});
+
+}
+window.addEventListener("click", e => {
+  if (!e.target.classList.contains('active')) {
+    for (i = 0; i < arrow.length; i++) {
+      let subMenu = arrow[i].nextElementSibling;
+      if (subMenu.classList.contains('open')) {
+        subMenu.classList.remove('open');
+        arrow[i].classList.remove('active');
+      }
+    }
+  }
+}, true)
+
 
 // Dynamic Adapt v.1
 // HTML data-da="where(uniq class name),when(breakpoint),position(digi)"
@@ -187,34 +220,67 @@ const da = new DynamicAdapt("max");
 da.init();
 new Swiper('.introducing__slider', {
 
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-    },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
+  },
 
-    pagination: {
-        el: '.swiper-pagination',
+  pagination: {
+    el: '.swiper-pagination',
 
-        clickable: true,
-    },
+    clickable: true,
+  },
 
-    spaceBetween: 0,
+  spaceBetween: 0,
 
-    /*    autoplay: {
-    
-            delay: 5000,
-        }*/
+  /*    autoplay: {
+  
+          delay: 5000,
+      }*/
 
-    speed: 500,
+  speed: 500,
 
-    effect: 'fade',
-
-    breakpoints: {
-        320: {
-
-        },
-    }
+  effect: 'fade',
 
 });
 
-new Swiper('.products__slider')
+new Swiper('.slider2', {
+
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
+  },
+
+  spaceBetween: 30,
+
+  slidesPerView: 1,
+
+  slidesPerGroup: 1,
+
+  breakpoints: {
+    453: {
+      slidesPerView: 2,
+    },
+    723: {
+      slidesPerGroup: 2,
+      slidesPerView: 3,
+    },
+    943: {
+      slidesPerView: 4,
+    },
+  },
+
+  speed: 500,
+})
+
+new Swiper('.slider3', {
+
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
+  },
+
+  freeMode: true,
+
+  speed: 500,
+})

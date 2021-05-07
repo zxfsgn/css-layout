@@ -1,0 +1,105 @@
+.footer {
+  position: relative;
+  padding: 40px 0 0 0;
+  background: #5c7489;
+  margin-top: 50px;
+  color: rgb(200, 212, 220);
+  font-size: 13px;
+  font-family: "Roboto";
+  line-height: 1.385;
+  & a {
+    color: rgb(200, 212, 220);
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__body {
+    display: flex;
+    margin: 0 -5px;
+    @media (max-width: $md3 +px) {
+      flex-wrap: wrap;
+      margin-top: 100px;
+    }
+  }
+
+  &__column {
+    padding: 0 5px;
+    flex: 0 1 25%;
+    @media (max-width: $md3 +px) {
+      flex: 0 0 50%;
+      padding: 0;
+    }
+
+    &:first-child p {
+      margin: 20px 0;
+    }
+
+    &:nth-child(2) {
+      @media (max-width: $md3 +px) {
+        display: none;
+      }
+    }
+
+    &:nth-child(3) {
+      @media (max-width: $md3 +px) {
+        display: flex;
+        flex-direction: column;
+        line-height: 27px;
+        order: -1;
+        flex: 0 1 100%;
+        position: absolute;
+        width: 100vw;
+        top: 0;
+        right: 0;
+        a {
+          display: block;
+          border: 1px solid #fff;
+          text-decoration: none;
+          background: url(../img/arrow3.png) no-repeat 95%;
+          padding-left: 15px;
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    background: #2c3f53;
+    margin-top: 10px;
+    padding: 20px 0;
+  }
+
+  &__socials {
+    margin: 30px 0;
+  }
+}
+
+.bottom-footer {
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: $md3 +px) {
+      justify-content: center;
+    }
+  }
+
+  &__text {
+    @media (max-width: $md3 +px) {
+      display: none;
+    }
+  }
+}
+
+.middle-footer {
+  &__content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__text {
+  }
+
+  &__socials {
+  }
+}
