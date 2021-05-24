@@ -6,5 +6,5 @@ const productScheme = new Schema({
   img: String
 })
 
-const Product = model("User", productScheme)
+const Product = model("Product", productScheme)
 module.exports = Product

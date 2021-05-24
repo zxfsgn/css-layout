@@ -1,5 +1,5 @@
 {
   "port": 5000,
   "jwtSecret": "fqef32423eqffq",
-  "mongoUri": "mongodb://localhost:27017/usersdb"
+  "mongoUri": "mongodb://localhost:27017/productsdb"
 }

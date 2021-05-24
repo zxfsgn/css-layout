@@ -6,6 +6,9 @@ const { Code } = require('mongodb');
 const app = express()
 
 app.use('/api/auth', require('./routes/authRouter'))
+app.use('/', require('./routes/productRouter'))
+
+app.use(express.static(__dirname + "../../Exercise1"));
 
 const PORT = config.get('port') || 5000
 
