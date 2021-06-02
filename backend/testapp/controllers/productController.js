@@ -2,8 +2,9 @@ const Product = require("../models/Product")
 
 exports.addProduct = async (req, res) => {
 
-  const { name, price, image } = req.body
-  const product = new Product({ name, price, image })
+  const img = `${req.file.path}`;
+  const { name, price } = req.body
+  const product = new Product({ name, price, img })
 
   await product.save()
 

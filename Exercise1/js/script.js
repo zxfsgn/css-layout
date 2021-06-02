@@ -285,10 +285,9 @@ new Swiper('.slider3', {
   speed: 500,
 })
 
-const { reset } = require("browser-sync");
 
 async function GetProducts() {
-  const response = await fetch("/", {
+  const response = await fetch("/test", {
     method: "GET",
     headers: { "Accept": "application/json" }
   });
@@ -297,28 +296,44 @@ async function GetProducts() {
   }
 }
 
-async function CreateProduct(name, price, image) {
-  const response = await fetch("/", {
+async function CreateUser(email, password) {
+  await fetch("http://localhost:5000/api/auth/register/", {
     method: "POST",
     headers: { "Accept": "application/json", "Content-Type": "application/json" },
     body: JSON.stringify({
-      name,
-      price: parseInt(price, 10),
-      image
+      email,
+      password
     })
   })
-  if (response.ok === true) {
-    const products = await response.json()
-    document.querySelectorAll('item-product__header')[0].replaceWith(products[0])
+}
+
+document.forms["registration"].addEventListener("submit", e => {
+  e.preventDefault();
+  const form = document.forms["registration"];
+  const email = form.elements["email"].value;
+  const password = form.elements["password"].value;
+  CreateUser(email, password)
+})
+
+async function Login(email, password) {
+  const response = await fetch("http://localhost:5000/api/auth/login", {
+    method: "POST",
+    headers: { "Accept": "application/json", "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email,
+      password
+    })
+  })
+  if (response.ok) {
+    document.forms["login"].insertAdjacentHTML("afterbegin", "<a href='editing.html' class='editing'>Редактирование</a>")
   }
 }
 
-document.forms["userForm"].addEventListener("submit", e => {
+document.forms["login"].addEventListener("submit", e => {
   e.preventDefault();
-  const form = document.forms["userForm"];
-  const name = form.elements["name"].value;
-  const price = form.elements["price"].value;
-  const image = form.elements["image"].value;
-  CreateProduct(name, price, image);
-});
+  const form = document.forms["registration"];
+  const email = form.elements["email"].value;
+  const password = form.elements["password"].value;
+  Login(email, password)
+})
 

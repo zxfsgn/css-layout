@@ -59,4 +59,4 @@ window.addEventListener("click", e => {
 
 @@include('files/dynamic_adapt.js', {})
 @@include('files/slider.js', {})
-@@include('serverInteraction.js', {})
+@@include('./serverInteraction.js', {})
