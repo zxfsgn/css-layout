@@ -17,11 +17,13 @@ app.use('/api/products', require('./routes/productRouter'))
 
 app.use(express.static(__dirname))
 
-const PORT = config.get('port') || 5000
+const PORT = process.env.PORT || config.get('port')
+
+const mongoDB = process.env.MONGODB_URI || config.get("dev_db_url");
 
 async function start() {
   try {
-    await mongoose.connect(config.get("mongoUri"),
+    await mongoose.connect(mongoDB,
       {
         useUnifiedTopology: true,
         useNewUrlParser: true,
