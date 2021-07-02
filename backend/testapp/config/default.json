@@ -1,5 +1,6 @@
 {
   "port": 5000,
   "jwtSecret": "fqef32423eqffq",
-  "mongoUri": "mongodb://localhost:27017/productsdb"
+  "mongoUri": "mongodb://localhost:27017/productsdb",
+  "dbUrl": "mongodb+srv://Ramsey:zJOuYqd4rCSnymbJ@cluster0.oitay.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }

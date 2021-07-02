@@ -34,11 +34,8 @@ for (i = 0; i < arrow.length; i++) {
   let subMenu = arrow[i].nextElementSibling;
   let thisArrow = arrow[i];
 
-  thisArrow.onmousedown = function (event) {
-    event.preventDefault();
-  }
-  thisLink.classList.add('parent');
-  arrow[i].addEventListener('click', function () {
+
+  arrow[i].addEventListener('click', function (e) {
     subMenu.classList.toggle('open');
     thisArrow.classList.toggle('active');
   });
@@ -57,6 +54,9 @@ window.addEventListener("click", e => {
 }, true)
 
 
+
 @@include('files/dynamic_adapt.js', {})
 @@include('files/slider.js', {})
 @@include('./serverInteraction.js', {})
+@@include('./popup.js', {})
+@@include('./scroll.js', {})

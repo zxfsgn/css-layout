@@ -116,6 +116,10 @@ $maxWidthContainer: 1170;
 @import "header";
 @import "footer";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   &._lock {
     overflow: hidden;
@@ -597,9 +601,12 @@ body {
 
   &__image {
     object-fit: cover;
+    width: 100%;
   }
 
   &__header {
+    display: inline-block;
+    min-height: 43px;
     font: 500 16px Roboto;
     color: rgb(70, 115, 171);
     text-decoration: underline;
@@ -1038,4 +1045,30 @@ $font-stack: 500 16px/22px Roboto;
       }
     }
   }
+}
+
+.scroll {
+  position: fixed;
+  left: 4%;
+  top: 5%;
+  font: 800 23px Roboto;
+  text-transform: uppercase;
+  color: #c8cfcf;
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 1s ease;
+
+  img {
+    padding: 0 14px;
+  }
+
+  div {
+    padding: 10px 0;
+  }
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
 }

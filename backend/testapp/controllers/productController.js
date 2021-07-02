@@ -14,7 +14,7 @@ exports.addProduct = async (req, res) => {
 
 exports.getProduct = async (req, res) => {
   const products = await Product.find({})
-  res.send({ products })
+  res.send(products)
 }
 
 exports.changeProduct = async (req, res) => {

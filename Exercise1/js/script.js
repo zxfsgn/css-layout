@@ -34,11 +34,8 @@ for (i = 0; i < arrow.length; i++) {
   let subMenu = arrow[i].nextElementSibling;
   let thisArrow = arrow[i];
 
-  thisArrow.onmousedown = function (event) {
-    event.preventDefault();
-  }
-  thisLink.classList.add('parent');
-  arrow[i].addEventListener('click', function () {
+
+  arrow[i].addEventListener('click', function (e) {
     subMenu.classList.toggle('open');
     thisArrow.classList.toggle('active');
   });
@@ -55,6 +52,7 @@ window.addEventListener("click", e => {
     }
   }
 }, true)
+
 
 
 // Dynamic Adapt v.1
@@ -285,17 +283,6 @@ new Swiper('.slider3', {
   speed: 500,
 })
 
-
-async function GetProducts() {
-  const response = await fetch("/test", {
-    method: "GET",
-    headers: { "Accept": "application/json" }
-  });
-  if (response.ok) {
-
-  }
-}
-
 async function CreateUser(email, password) {
   await fetch("http://localhost:5000/api/auth/register/", {
     method: "POST",
@@ -313,7 +300,28 @@ document.forms["registration"].addEventListener("submit", e => {
   const email = form.elements["email"].value;
   const password = form.elements["password"].value;
   CreateUser(email, password)
+  document.querySelector('.reg').classList.remove('open')
+  document.querySelector('.auth').classList.add('open')
+  localStorage.removeItem('password')
+  localStorage.removeItem('email')
+  logForm.elements["email"].value = email
+  logForm.elements["password"].value = password
+  logForm.elements['agreement'].checked = false
 })
+
+let exit = document.querySelector('.middle-header__exit')
+exit.onclick = () => {
+  localStorage.removeItem('user')
+}
+
+let AdminConfirmed = () => {
+  document.querySelector(".middle-header__exit").insertAdjacentHTML("beforebegin", "<a href='editing.html' class='editing'>Редактирование </a>")
+  document.forms["registration"].setAttribute('hidden', true)
+  document.forms["login"].setAttribute('hidden', true)
+  document.querySelector('.middle-header__registr').setAttribute('hidden', true)
+  document.querySelector('.middle-header__login').setAttribute('hidden', true)
+  exit.style.display = "inline"
+}
 
 async function Login(email, password) {
   const response = await fetch("http://localhost:5000/api/auth/login", {
@@ -325,15 +333,96 @@ async function Login(email, password) {
     })
   })
   if (response.ok) {
-    document.forms["login"].insertAdjacentHTML("afterbegin", "<a href='editing.html' class='editing'>Редактирование</a>")
+    AdminConfirmed()
+    localStorage.setItem('user', 'admin')
   }
 }
 
 document.forms["login"].addEventListener("submit", e => {
   e.preventDefault();
-  const form = document.forms["registration"];
+  const form = document.forms["login"];
   const email = form.elements["email"].value;
   const password = form.elements["password"].value;
   Login(email, password)
+  if (form.elements["agreement"].checked) {
+    localStorage.setItem('password', password)
+    localStorage.setItem('email', email)
+  } else {
+    localStorage.removeItem('password')
+    localStorage.removeItem('email')
+  }
+  //if email is contained in localStorage then make autocomplete password
 })
 
+let logForm = document.forms["login"]
+
+if (localStorage.getItem('password')) {
+  logForm.elements["email"].value = localStorage.getItem('email')
+  logForm.elements["password"].value = localStorage.getItem('password')
+  logForm.elements['agreement'].checked = true
+}
+
+if (localStorage.getItem('user')) {
+  AdminConfirmed()
+}
+
+async function GetProducts() {
+  const response = await fetch("http://localhost:5000/api/products", {
+    method: "GET",
+    headers: { "Accept": "application/json" }
+  })
+  if (response.ok) {
+    const products = await response.json()
+    products.forEach((item) => {
+      let template = document.querySelector('.item-product').cloneNode(true)
+      template.querySelector('img').setAttribute('src', `http://localhost:5000/${item.img}`)
+      template.querySelector('picture > source').setAttribute('srcset', `http://localhost:5000/${item.img}`)
+      template.querySelector('.item-product__price > span').innerHTML = item.price
+      template.querySelector('.item-product__header').innerHTML = item.name
+      document.querySelector('.slider2__wrapper').prepend(template)
+    })
+  }
+}
+
+GetProducts()
+let popup = document.querySelector('.auth')
+let popup2 = document.querySelector('.reg')
+let link = document.querySelector('.middle-header__login')
+let link2 = document.querySelector('.middle-header__registr')
+
+
+link.addEventListener('click', (e) => {
+  e.preventDefault()
+  popup.classList.add('open')
+})
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.auth') && e.target != link) {
+    popup.classList.remove('open')
+  }
+})
+
+link2.addEventListener('click', (e) => {
+  e.preventDefault()
+  popup2.classList.add('open')
+})
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.reg__body') && e.target != link2) {
+    popup2.classList.remove('open')
+  }
+})
+scroll = document.querySelector('.scroll')
+
+window.addEventListener('scroll', (e) => {
+  if (window.pageYOffset > 300) {
+    scroll.classList.add('visible')
+  }
+  if (window.pageYOffset < 300) {
+    scroll.classList.remove('visible')
+  }
+})
+
+scroll.addEventListener('click', (e) => {
+  window.scrollTo(0, 0)
+})

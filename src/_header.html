@@ -62,8 +62,44 @@
         Ваш регион: <a href="" class="middle-header__region">Москва</a>
       </div>
       <div class="middle-header__column">
+        <form name="registration" class="middle-header__reg reg">
+          <div class="reg__body">
+            <h1 class="reg__header"> Регистрация</h1>
+            <div class="reg__element">
+              <label for="email">E-mail<span>*</span></label>
+              <input name="email" type="email">
+            </div>
+            <div class="reg__element">
+              <label for="password">Пароль<span>*</span></label>
+              <input name="password" type="password">
+            </div>
+            <div class="reg__element">
+              <button type="submit" class="reg__button">Зарегистрироваться</button>
+            </div>
+          </div>
+        </form>
         <a href="" class="middle-header__login">Войти</a>
-        <a href="" class="middle-header__personal-area">Личный кабинет</a>
+        <a href="" class="middle-header__registr">Регистрация</a>
+        <a href="" class="middle-header__exit">Выход</a>
+        <form name="login" class="middle-header__auth auth">
+          <h1 class="auth__header">Авторизация</h1>
+          <div class="auth__element">
+            <label for="email" class="auth__email">E-mail<span>*</span></label>
+            <input name="email" type="email">
+          </div>
+          <div class="auth__element">
+            <label for="password" class="auth__password">Пароль<span>*</span></label>
+            <input name="password" type="password">
+          </div>
+          <div>
+            <input class="auth__remember" name="agreement" id="formAgreement" type="checkbox">
+            <label class="auth__remember" for="formAgreement">Запомнить меня</label>
+          </div>
+          <div class="auth__element">
+            <a href="" class="auth__forget">Забыли пароль?</a>
+            <button type="submit" class="auth__button">Войти</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

@@ -13,7 +13,9 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/auth', require('./routes/authRouter'))
-app.use('/', require('./routes/productRouter'))
+app.use('/api/products', require('./routes/productRouter'))
+
+app.use(express.static(__dirname))
 
 const PORT = config.get('port') || 5000
 

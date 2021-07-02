@@ -11,33 +11,12 @@
 
 <body>
   <div class="wrapper">
+    <section class="scroll">
+      <img src="img/arrowup.png" alt="">
+      <div>Наверх</div>
+    </section>
     @@include('_header.html',{})
 
-    <form name="registration">
-      <span>Sign up</span>
-      <div>
-        <label for="email">E-mail:</label>
-        <input name="email">
-      </div>
-      <div>
-        <label for="password">password:</label>
-        <input name="password" type="password">
-      </div>
-      <button type="submit">send</button>
-    </form>
-
-    <form name="login">
-      <span>Sign in</span>
-      <div>
-        <label for="email">E-mail:</label>
-        <input name="email">
-      </div>
-      <div>
-        <label for="password">password:</label>
-        <input name="password" type="password">
-      </div>
-      <button type="submit">send</button>
-    </form>
     <main class="page">
       <div class="page__container _container">
         <nav class="page__menu main-menu">

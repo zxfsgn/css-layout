@@ -15,7 +15,7 @@ const storageConfig = multer.diskStorage({
 
 const upload = multer({ storage: storageConfig })
 
-productRouter.post("/editing", [
+productRouter.post("/", [
   jsonParser,
   upload.single("image")
 ], productController.addProduct)

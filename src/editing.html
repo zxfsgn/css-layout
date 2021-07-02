@@ -12,7 +12,7 @@
     <input type="hidden" name="id" value="0" />
     <div class="form-group">
       <label for="name">Имя:</label>
-      <input class="form-control" name="name" />
+      <input class="form-control" name="name" autocomplete="off" />
     </div>
     <div class="form-group">
       <label for="price">Цена:</label>
@@ -30,7 +30,7 @@
   </form>
   <script>
     async function CreateProduct() {
-      const response = await fetch("http://localhost:5000/editing ", {
+      const response = await fetch("http://localhost:5000/api/products ", {
         method: "POST",
         body: new FormData(userForm)
       })

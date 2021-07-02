@@ -8,7 +8,7 @@
 .menu {
   position: relative;
   height: 100%;
-  width: 100%;
+
   &__list {
     @media (max-width: $md1+px) {
       overflow: auto;
@@ -27,6 +27,7 @@
         border: none;
         padding: 0;
         background: none;
+        justify-content: center;
       }
       &._active {
         top: 0;
@@ -38,17 +39,13 @@
     > li {
       display: block;
       position: relative;
-      border-left: dotted 1px #323232;
       display: flex;
       align-items: center;
-      justify-content: center;
+      border-left: #363c3e dotted 1px;
       padding: 0 adaptivBlock(28.9, 14.5, 1200, 970);
+
       @media (max-width: $md1+px) {
         flex-wrap: wrap;
-      }
-
-      a:hover {
-        color: #ff6837;
       }
 
       &:first-child {
@@ -66,9 +63,13 @@
     @media (max-width: $md1+px) {
       font-size: 24px;
     }
+
     font-size: 13px;
     font-family: "Roboto";
     color: rgb(189, 195, 197);
+    &:hover {
+      color: #ff5816;
+    }
   }
 
   &__clarification {
@@ -93,10 +94,6 @@
       }
     }
   }
-
-  /*&.parent {
-    margin: 0px 30px 0px 0px;
-  }*/
 }
 
 //Burger
@@ -158,6 +155,7 @@
     }
 
     margin: 10px 0 0 0;
+    position: relative;
   }
 
   &__region {
@@ -174,11 +172,15 @@
     margin-right: 20px;
   }
 
-  &__personal-area {
+  &__registr {
     @media (max-width: $md4+px) {
       margin-right: calc(40 * (100vw - 320px) / 170);
     }
     text-decoration: underline;
+  }
+
+  &__exit {
+    display: none;
   }
 }
 
@@ -495,23 +497,27 @@
 
 .sub-menu {
   &__list {
-    display: none;
     position: absolute;
     width: auto;
     background-color: #000;
     left: 0;
     top: 25px;
-    transition: all 10s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
     @media (max-width: $md1+px) {
-      left: 65%;
       flex: 0 0 100%;
-      position: static;
+      position: fixed;
       text-align: center;
       font-size: 20px;
+      &.open {
+        position: static;
+      }
     }
 
     &.open {
-      display: block;
+      opacity: 1;
+      visibility: visible;
     }
 
     > li {
@@ -538,14 +544,157 @@
 
   &:hover {
     border-top-color: #4673ab;
-    outline: 1px solid #818588;
-    outline-offset: 2px;
-    @media (max-width: $md1+px) {
-      outline: none;
-    }
   }
 
   &.active {
     transform: rotate(-180deg);
+  }
+}
+
+.auth {
+  position: absolute;
+  left: -158%;
+  background: #fff;
+  z-index: 2;
+  width: 350px;
+  padding: 20px;
+  border: 2px #bdc3c5 solid;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease 0s;
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  a {
+    text-decoration: underline;
+    &:hover {
+      color: #ff5816;
+    }
+  }
+
+  &__header {
+    font: 500 20px Roboto;
+    text-transform: uppercase;
+  }
+
+  &__element {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      color: #ff5816;
+    }
+
+    input {
+      border: 1px solid #bdc3c5;
+      border-radius: 3px;
+      height: 25px;
+      width: 200px;
+      padding: 0 5px;
+
+      &:focus {
+        box-shadow: inset 0 0 3px #818588;
+      }
+    }
+  }
+
+  &__remember {
+    cursor: pointer;
+  }
+
+  &__forget {
+    text-decoration: underline;
+  }
+
+  &__button {
+    height: 35px;
+    width: 100px;
+    color: #fff;
+    font: 400 15px Roboto;
+    text-transform: uppercase;
+    background: #ff5816;
+    border-radius: 5px;
+    border-bottom: 3px #c44817 solid;
+
+    &:hover {
+      background: #4673ab;
+      border-color: #284263;
+    }
+  }
+}
+
+.reg {
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease 0s;
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__body {
+    background-color: #fff;
+    padding: 30px;
+    font: 400 25px Roboto;
+  }
+
+  &__header {
+    font-size: 30px;
+    text-transform: uppercase;
+    padding: 0 0 20px;
+    text-align: center;
+  }
+
+  &__element {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      color: #ff5816;
+    }
+
+    input {
+      border: 1px solid #bdc3c5;
+      border-radius: 3px;
+      height: 35px;
+      width: 200px;
+      padding: 0 5px;
+      font-size: 15px;
+
+      &:focus {
+        box-shadow: inset 0 0 3px #818588;
+      }
+    }
+  }
+
+  &__button {
+    height: 35px;
+    width: 300px;
+    color: #fff;
+    font: 400 20px Roboto;
+    text-transform: uppercase;
+    background: #ff5816;
+    border-radius: 5px;
+    border-bottom: 3px #c44817 solid;
+
+    &:hover {
+      background: #4673ab;
+      border-color: #284263;
+    }
   }
 }
