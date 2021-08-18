@@ -1217,10 +1217,10 @@ body._lock {
   margin-bottom: 50px;
 }
 
-.item-product__image-wrapper,
-.picture-wrapper,
+.numbers-products__circle,
 .strengths-products__picture-wrapper,
-.numbers-products__circle {
+.picture-wrapper,
+.item-product__image-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1363,11 +1363,11 @@ body._lock {
   margin-left: -11px;
 }
 
-.tabs-products input[type="radio"] {
+.tabs-products input[type=radio] {
   display: none;
 }
 
-.tabs-products input[type="radio"]:checked + label {
+.tabs-products input[type=radio]:checked + label {
   background-color: #fff;
   text-decoration: none;
   color: #000;
